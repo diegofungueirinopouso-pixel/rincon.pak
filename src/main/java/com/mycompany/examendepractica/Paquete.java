@@ -11,42 +11,46 @@ import java.util.Objects;
  * @author holab
  */
 public class Paquete {
+
     private String codigo;
     private double peso;
     private String destino;
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.codigo);
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.peso) ^ (Double.doubleToLongBits(this.peso) >>> 32));
-        hash = 67 * hash + Objects.hashCode(this.destino);
-        return hash;
+    public Paquete(String codigo, double peso, String destino) {
+        this.codigo = codigo;
+        this.peso = peso;
+        this.destino = destino;
     }
 
+    // Getters
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    // Dos paquetes son iguales si tienen el mismo código
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Paquete other = (Paquete) obj;
-        if (Double.doubleToLongBits(this.peso) != Double.doubleToLongBits(other.peso)) {
-            return false;
-        }
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        return Objects.equals(this.destino, other.destino);
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Paquete otro = (Paquete) obj;
+        return this.codigo.equals(otro.codigo);
     }
 
-   
+    @Override
+    public int hashCode() {
+        return codigo.hashCode();
+    }
 
-
-    
+    @Override
+    public String toString() {
+        return "Paquete{codigo='" + codigo + "', peso=" + peso + "kg, destino='" + destino + "'}";
+    }
 }
